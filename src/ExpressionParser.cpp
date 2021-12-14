@@ -1,8 +1,20 @@
 #include <cctype>
 #include <iostream>
 
-#include "include/expressionParser/ExpressionParser.hpp"
-#include "include/exceptions/InvalidTokenException.hpp"
+#include "../include/expressionParser/ExpressionParser.hpp"
+#include "../include/exceptions/InvalidTokenException.hpp"
+
+bool prev_token_is_r_par(std::vector<std::string> result, size_t pos) {
+	return (result.size() > 0) && (result.back()[result.back().size() - 1] == ')');
+}
+
+bool prev_token_is_digit(std::vector<std::string> result, size_t pos) {
+	return (result.size() > 0) && (isdigit(result.back()[result.back().size() - 1]));
+}
+
+bool next_char_is_digit(std::string expression, size_t pos) {
+	return (pos <= (expression.size() - 1)) && isdigit(expression[pos + 1]);
+}
 
 //big ugly function_1
 std::vector<std::string> ExpressionParser::split_string(std::string expression) {
@@ -30,8 +42,10 @@ std::vector<std::string> ExpressionParser::split_string(std::string expression) 
 			result.push_back(expression.substr(begin, end - begin));
 			begin = end;
 		}
-		//numbers (start from digit, or from minus if there is no ')' before and next char is digit or this is first token but not if this is the last one) Yes, this is disgusting. Shame on me
-		else if (isdigit(expression[end]) || (expression[end] == '-' && (end > 0 && result.back()[result.back().size()- 1] != ')') && isdigit(expression[end + 1]) && (result.size() == 0 || !isdigit(result.back()[result.back().size()- 1]))) ) {
+		//numbers 
+		else if (	isdigit(expression[end]) || 
+					((expression[end] == '-') && !prev_token_is_r_par(result, end) && !prev_token_is_digit(result, end) && next_char_is_digit(expression, end))
+				) {
 			do {
 				end++;
 				if (expression[end] == ',')

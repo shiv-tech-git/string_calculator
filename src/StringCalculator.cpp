@@ -1,4 +1,4 @@
-#include "include/StringCalculator.hpp"
+#include "../include/StringCalculator.hpp"
 
 StringCalculator::StringCalculator() {
 	ep = new ExpressionParser();

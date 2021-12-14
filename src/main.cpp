@@ -2,8 +2,8 @@
 #include <sstream>
 #include <iomanip>
 
-#include "./include/StringCalculator.hpp"
-#include "./include/exceptions/InvalidTokenException.hpp"
+#include "../include/StringCalculator.hpp"
+#include "../include/exceptions/InvalidTokenException.hpp"
 
 int main()
 {
@@ -19,6 +19,6 @@ int main()
 		catch (InvalidTokenException ex) {
 			continue;
 		}
-		std::cout << "result: " << std::setprecision(2) << std::setfill( '0' )<< result << std::endl << std::endl;
+		std::cout << "result: " << std::setprecision(2) << std::setfill('0')<< result << std::endl << std::endl;
 	}
 }

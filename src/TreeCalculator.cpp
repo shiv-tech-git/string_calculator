@@ -1,4 +1,4 @@
-#include "include/TreeCalculator.hpp"
+#include "../include/TreeCalculator.hpp"
 
 TreeCalculator::TreeCalculator() {
 	oper['+'] = add;

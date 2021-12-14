@@ -3,8 +3,8 @@
 #include <sstream>
 #include <iomanip>
 
-#include "include/expressionTree/ExpressionTree.hpp"
-#include "include/exceptions/InvalidTokenException.hpp"
+#include "../include/expressionTree/ExpressionTree.hpp"
+#include "../include/exceptions/InvalidTokenException.hpp"
 
 ExpressionTree::ExpressionTree(): max_precedences(2), root(nullptr) {
 	operator_precedences['-'] = 1;
