@@ -36,7 +36,7 @@ std::vector<std::string> ExpressionParser::split_string(std::string expression) 
 			end++;
 			begin = end;
 		}
-		//parantheses
+		//parentheses
 		else if (expression[end] == '(' || expression[end] == ')') {
 			end++;
 			result.push_back(expression.substr(begin, end - begin));

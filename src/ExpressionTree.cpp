@@ -48,7 +48,8 @@ int ExpressionTree::get_min_precedence_operator_index(std::vector<token_t>& toke
 
 void print_expression_position(std::vector<token_t>& tokens, size_t err_i) {
 	std::string expression;
-	size_t pos;
+	size_t begin = 0;
+	size_t end = 0;
 	
 	for (size_t i = 0; i < tokens.size(); i++) {
 		if (tokens[i].type == TokenType::l_par_tok) {
@@ -64,10 +65,12 @@ void print_expression_position(std::vector<token_t>& tokens, size_t err_i) {
 		}
 		expression += " ";
 		if (i == (err_i - 1))
-			pos = expression.size();
+			begin = expression.size();
+		if (i >= (err_i) && end == 0 && (tokens[i].type == TokenType::r_par_tok))
+			end = expression.size();
 	}
 	std::cout << '\t' << expression << std::endl;
-	std::cout << '\t' << std::string(pos - 1, ' ') << std::string(pos - 1, '^')<< std::endl;
+	std::cout << '\t' << std::string(begin - 1, ' ') << std::string(end - begin, '^')<< std::endl;
 }
 
 etNode* ExpressionTree::build_recursively(std::vector<token_t>& tokens, size_t begin, size_t end) {
