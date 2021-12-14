@@ -74,7 +74,7 @@ void print_expression_position(std::vector<token_t>& tokens, size_t err_i) {
 }
 
 etNode* ExpressionTree::build_recursively(std::vector<token_t>& tokens, size_t begin, size_t end) {
-	if (tokens[begin].type == TokenType::l_par_tok && tokens[end].type == TokenType::r_par_tok) {
+	while (tokens[begin].type == TokenType::l_par_tok && tokens[end].type == TokenType::r_par_tok) {
 		begin++;
 		end--;
 	}
